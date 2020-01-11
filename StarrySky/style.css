@@ -1,0 +1,356 @@
+p,h1 {
+  margin: 0
+}
+#defaultCanvas0 {
+ position: absolute;
+ /* top: 800px; */
+}
+
+#popupBox {
+ background-color: #ffffff;
+ box-shadow: 0 0 2px 2px #999;
+ padding: 5px;
+ position: absolute;
+ /* position: fixed; */
+ right: 200px;
+ width: 300px;
+ z-index: 6;
+ /* height: 200px; */
+}
+#selectBenefits {
+ position: fixed;
+ top: 220px;
+ right: 200px;
+}
+
+#selectOptions {
+ position: fixed;
+ top: 280px;
+ right: 200px;
+}
+
+#selectWellness {
+ position: fixed;
+ top: 340px;
+ right: 200px;
+}
+
+#selectSeekHelp {
+ position: fixed;
+ top: 400px;
+ right: 200px;
+}
+
+#selectAnonymity {
+ position: fixed;
+ top: 460px;
+ right: 200px;
+}
+
+#selectLeave {
+ position: fixed;
+ top: 520px;
+ right: 200px;
+}
+
+.right-desc__box {
+ display: flex;
+ height: 100%;
+ width: 400px;
+ flex-wrap: wrap;
+ border: 1px #eee solid;
+ background-color: rgba(0,0,0);
+ /* background-color: #000; */
+ border-radius: 20px;
+ color: #fff
+}
+
+#svgContainer {
+ width: 400px;
+ height: 85%;
+ overflow-y: scroll;
+ overflow-x: hidden;
+ padding: 0 10px;
+ /* display: none; */
+}
+
+#svgWrapper {
+ margin-top: -50px;
+}
+
+.desc-box__title {
+ color: #fff;
+ /* line-height: 40px; */
+ padding: 20px;
+ text-align: left;
+ height: 5%;
+}
+
+.desc-box__title span {
+  font-size: 14px;
+ font-weight: 200;
+}
+
+.system {
+ display: inline-block;
+ position: relative;
+ vertical-align: middle;
+ width: 50px;
+ height: 50px;
+}
+
+.planet {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 50px;
+ height: 50px;
+ -moz-animation-name: rotate;
+ -moz-animation-iteration-count: infinite;
+ -moz-animation-timing-function: linear;
+ -webkit-animation-name: rotate;
+ -webkit-animation-iteration-count: infinite;
+ -webkit-animation-timing-function: linear;
+ animation-name: rotate;
+ animation-iteration-count: infinite;
+ animation-timing-function: linear;
+}
+
+.slidedown {
+ -moz-animation-name: slidedown;
+ -moz-animation-iteration-count: 1;
+ -moz-animation-timing-function: linear;
+ -webkit-animation-name: slidedown;
+ -webkit-animation-iteration-count: 1;
+ -webkit-animation-timing-function: linear;
+ animation-name: slidedown;
+ animation-iteration-count: 1;
+ animation-timing-function: linear;
+}
+
+.drag-icon {
+ background-image: url('4x/drag-icon.png');
+ background-position:center;
+ background-size: 100% 100%;
+ background-repeat: no-repeat;
+ width: 50px;
+ height: 50px;
+}
+
+.lasso-icon {
+ background-image: url('4x/lasso-icon.png');
+ background-position:center;
+ background-size: 100% 100%;
+ background-repeat: no-repeat;
+ width: 50px;
+ height: 50px;
+}
+
+.interact-button {
+ display: flex;
+ flex-wrap: wrap;
+ height: 70px;
+ width: 50px;
+ color: #fff;
+ justify-content: center;
+}
+
+.right-side {
+ display: flex;
+ position: fixed;
+ top: 15%;
+ right: 3%;
+ z-index: 5;
+ height: 80%;
+}
+
+.button-box {
+ margin-right: 20px;
+ display: flex;
+ flex-direction: column;
+ justify-content: flex-end;
+}
+
+
+
+@-moz-keyframes slidedown {
+ from { -moz-transform: translateY(0); }
+ to { -moz-transform: translateY(-20); }
+}
+
+@-webkit-keyframes slidedown {
+ from { -webkit-transform: translateY(0); }
+ to { -webkit-transform: translateY(-20); }
+}
+
+@keyframes slidedown {
+ from { transform: translateY(0); }
+ to { transform: translateY(-20); }
+}
+
+.slider-interval {
+ position: fixed;
+ width: 300px;
+ bottom: 30%;
+ left: 30%
+}
+
+.move-state {
+ cursor:move;
+}
+
+.sys__title {
+ position: fixed;
+ top: 5%;
+ left: 50%;
+ transform:  translateX(-50%);
+ z-index: 5;
+ color: #fff;
+ font-size: 40px;
+ font-weight: 200;
+ white-space: nowrap;
+}
+
+.interaction-into {
+ background-color: #fff;
+ left: 50%;
+ transform: translateX(-50%);
+ border-radius: 20px;
+ color: #000;
+ position: fixed;
+ top: 12%;
+ z-index: 5;
+ padding: 10px 20px;
+}
+
+.triangle {
+ width: 30px;
+ height: 30px;
+ position: fixed;
+ left: 50%;
+ transform: translateX(-50%) rotate(45deg);
+ top: 11%;
+ z-index: 5;
+ background-color: #fff;
+}
+
+.size-sliderbar {
+ position: fixed;
+ bottom: 5%;
+ left: 50%;
+ /* width: 500px; */
+ transform: translateX(-50%);
+ z-index: 5;
+}
+
+#tree-wrap {
+ position: fixed;
+ top: 5%;
+ left: 3%;
+ background-color:transparent;
+ z-index: 5;
+ width: 400px;
+ height: 200px;
+}
+
+.svg-tree {
+ border: 0
+}
+
+.link {
+ fill: none;
+ stroke: #fff;
+ stroke-width: 3px;
+} 
+/* 
+    .slider-scale {
+      position: fixed;
+      width: 300px;
+      bottom: 13%;
+      left: 30%
+    } */
+
+    /* @-moz-keyframes rotate {
+      from { -moz-transform: rotateZ(0deg); }
+      to { -moz-transform: rotateZ(-360deg); }
+    }
+
+    @-webkit-keyframes rotate {
+      from { -webkit-transform: rotateZ(0deg); }
+      to { -webkit-transform: rotateZ(-360deg); }
+    }
+
+    @keyframes rotate {
+      from { transform: rotateZ(0deg); }
+      to { transform: rotateZ(-360deg); }
+    }
+
+    .planet-individual {
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* width: 50px;
+      height: 50px; */
+      /* -moz-animation-name: scale;
+      -moz-animation-iteration-count: infinite;
+      -moz-animation-timing-function: linear;
+      -webkit-animation-name: scale;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+      animation-name: scale;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    @-moz-keyframes scale {
+      0% { -moz-transform: scale(0,0); }
+      50% { -moz-transform: scale(1,1); }
+      100% { -moz-transform: scale(0,0); }
+    }
+
+    @-webkit-keyframes scale {
+      0% { -webkit-transform: scale(0,0); }
+      50% { -webkit-transform: scale(1,1); }
+      100% { -webkit-transform: scale(0,0); }
+    }
+
+    @keyframes scale {
+      0% { transform: scale(0,0); }
+      50% { transform: scale(1,1); }
+      100% { transform: scale(0,0); }
+    }
+
+    .planet-opacity {
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* width: 50px;
+      height: 50px; */
+      /* -moz-animation-name: opacity;
+      -moz-animation-iteration-count: infinite;
+      -moz-animation-timing-function: linear;
+      -webkit-animation-name: opacity;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+      animation-name: opacity;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    @-moz-keyframes opacity {
+      0% { opacity: 0 }
+      50% { opacity: 1 }
+      100% { opacity: 0 }
+    }
+
+    @-webkit-keyframes opacity {
+      0% { opacity: 0 }
+      50% { opacity: 1 }
+      100% { opacity: 0}
+    }
+
+    @keyframes opacity {
+      0% { opacity: 0 }
+      50% { opacity: 1 }
+      100% { opacity: 0 }
+    }  */
