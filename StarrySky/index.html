@@ -18,9 +18,25 @@
 body {
   background-color: black;
   color: white;
+  position: fixed;
+  height: 100%;
+  width: 100%
 }
 #popupBox {
-  color: black;
+  /*color: black;
+  background-color: #ddd;*/
+  color: white;
+  background-color: black;
+  border: solid 1px rgba(255,255,255,0.4);
+  padding: 6px 0 6px 10px;
+  font-size: 12px;
+  line-height: 18px;
+  z-index: 10;
+  border-radius: 6px;
+  box-shadow: 0 0 8px rgba(255,255,255,0.5);
+  display: none;
+  position: absolute;
+ width: 300px;
 }
 .title {
   font-size: 24px;
@@ -38,9 +54,10 @@ body {
   background-color: transparent;
   position: absolute;
   top: 60px;
-  right: 10px;
   z-index: 5;
   height: 90%;
+  transition: right 0.5s;
+  transition-timing-function: ease-in-out;
 }
 .left-panel {
   width: 380px;
@@ -55,6 +72,8 @@ body {
   border: 0.8px #ccc solid;
   border-radius: 10px;
   background-color: black;
+  float: right;
+  margin-left: 10px;
 }
 .panel-title {
   font-size: 22px;
@@ -75,9 +94,12 @@ body {
   margin-bottom: 10px;
 }
 #radius-legend {
-  height: 60px;
-  width: 360px;
-  margin-bottom: 10px;
+  height: 100px;
+  width: 260px;
+  margin: 20px 0 20px;
+}
+#radius-legend img {
+  width: 100%;
 }
 #flicker-legend {
   height: 50px;
@@ -135,15 +157,35 @@ img{
 .element:hover {
   cursor: pointer;
 }
+
+#empty-container {
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  height: 80%;
+  align-items: center;
+  justify-content: center;
+}
+#empty-container img {
+  opacity: .5;
+  width: 150px;
+}
+#empty-container p {
+  margin: 20px 0; 
+  color: #999
+}
 /*css部分*/
 
 </style>
 </head>
 
 <body>
-  <div id="popupBox"></div>
+<div id="popupBox">
+  <span class="close-icon" onclick="this.parentNode.style.display = 'none'"></span>
+  <div id="popupText"></div>
+</div>
 <!-- 标题区域 -->
-<div class="title">The Universe Of Mental Health In Tech Company</div>
+<div class="title">The Universe of Mental Health in Tech Company</div>
 <!-- <span class="triangle"></span>
 <span class="interaction-into"> Middle-click to drag starry sky & Right-click to select an individual </span> -->
 <!-- 左边栏区域 -->
@@ -159,7 +201,9 @@ img{
     <div class="panel-text">Colors - Mental Health Conditions</div>
     <div id="color-legend"></div>
     <div class="panel-text">Radius - Amount of Conditions</div>
-    <div id="radius-legend"></div>
+    <div id="radius-legend">
+      <img src="img/scale-legend.png" alt="">
+    </div>
     <div class="panel-text">Flicker & Starrings - Discrimination</div>
     <div id="flicker-legend">
       <div class="flicker" style="-webkit-animation-duration: 1s;"></div>
@@ -175,41 +219,74 @@ img{
   </div>
 </div>
 <!-- 右边栏区域 -->
-<div class="right-side">
+<div class="right-side" style=" right: -704px;">
     <!-- 按钮区域 -->
-    <div class="button-box">
+    <div style="width: 60px; height: 200px; bottom: 20px; left: -60px; position: absolute;">
+      <div class="interact-button" id="showBtn" style="margin-bottom: 20px" value="false" onclick="showDetail(this)">
+        <p class="detail-icon"></p>
+        <p>Detail</p>
+      </div>
       <div class="interact-button" id="drag" style="margin-bottom: 20px" onclick="changeButton(this)">
         <p class="drag-icon"></p>
-        <p>drag</p>
+        <p>Drag</p>
       </div>
       <div class="interact-button" id="lasso" onclick="changeButton(this)">
         <p class="lasso-icon"></p>
-        <p>select</p>
+        <p>Select</p>
       </div>
     </div>
     <!-- 细节描述框 -->
-      <div class="right-desc__box">
-        <div class="desc-box__title">
-          <div class="panel-title">Detail icon</div>
-          <div class="panel-text">Please CLICK one of the elements to help for analyizing:</div>
+    <div class="right-panel" style="width: 380px;">
+      <div class="panel-title">Detail icon</div>
+      <div class="panel-text" style="margin-bottom: 20px;">Please CLICK one of the elements for analyizing:</div>
+      <div id="empty-container">
+        <img src="img/empty-icon.png" alt="">
+        <p>Please select the stars in starry sky.</p>
+      </div>
+      <div id="svgContainer"></div>
+    </div>
+    <!-- 细节标签 -->
+    <div class="right-panel">
+      <div class="panel-title">Legend</div>
+      <div class="panel-text">Shape & Area - Individual</div>
+      <div class="image-legend"><img src="img/资源 1.svg"></div>
+      <div class="panel-text">Mental Health Benifits - Orbits</div>
+      <div class="image-legend"><img src="img/资源 2.svg"></div>
+      <div class="panel-text">Willing to Expose & Work Position</div>
+      <div style="height: 150px;">
+        <div id="pos-legend"></div>
+          <div style="width: 120px; padding: 20px 0 0 0;"><image src="img/资源 4.svg" title="pei"/></div>
         </div>
-        <div id="svgContainer"></div>
-      </div>
-      <div class="right-panel">
-        <div class="panel-title">Legend</div>
-        <div class="panel-text">Shape & Area - Individual</div>
-        <div class="image-legend"><img src="4x/资源 1.svg"></div>
-        <div class="panel-text">Mental Health Benifits - Orbits</div>
-        <div class="image-legend"><img src="4x/资源 2.svg"></div>
-        <div class="panel-text">Willing to Expose & Work Position</div>
-        <div style="height: 150px;">
-          <div id="pos-legend"></div>
-            <div style="width: 120px; padding: 20px 0 0 0;"><image src="4x/资源 4.svg" title="pei"/></div>
-          </div>
-      </div>
+    </div>
 </div>
   <!-- <input></input> -->
   <script>
+    var showDetailClickCount = 0;
+    function showDetail() {
+      var showDetail = document.getElementById("showBtn").getAttribute("value");
+      // console.log("before", showDetail);
+      if (showDetail == "false") {
+        showDetailClickCount += 1
+        document.getElementsByClassName('detail-icon')[0].style.opacity = .6
+        if(showDetailClickCount === 1) {
+          document.getElementsByClassName("right-side")[0].style.right = "-272px";
+        } else if(showDetailClickCount === 2){
+          document.getElementsByClassName("right-side")[0].style.right = "20px";
+          showDetailClickCount = 0
+          document.getElementById("showBtn").setAttribute("value", "true");
+        }
+        // console.log("a")
+      }
+      else if(showDetail == "true") {
+        document.getElementsByClassName('detail-icon')[0].style.opacity = 1
+        document.getElementsByClassName("right-side")[0].style.right = "-704px";
+        document.getElementById("showBtn").setAttribute("value", "false");
+        // console.log("b")
+      }
+      // console.log("after", document.getElementById("showBtn").getAttribute("value"));
+
+      //getElementsByClassName("left-side")[0].
+    }
     document.getElementById("popupBox").style.display = "none";
 
     // 职位
@@ -244,7 +321,7 @@ img{
     // 花瓣
     var starSVG = d3.select("#color-legend").append("svg").attr("height", 90).attr("width", 360);
 
-    var conditions = ["Mood Disorder (Depression, Bipolar Disorder, etc)", "Anxiety Disorder (Generalized, Social, Phobia, etc)", "Attention Deficit Hyperactivity Disorder", "Post-traumatic Stress Disorder", "Obsessive-Compulsive Disorder", "Substance Use Disorder", "Personality Disorder (Borderline, Antisocial, Paranoid, etc)", "Stress Response Syndromes", "Addictive Disorder", "Eating Disorder (Anorexia, Bulimia, etc)", "Dissociative Disorder", "Psychotic Disorder (Schizophrenia, Schizoaffective, etc)"];//"Other"
+    var conditions = ["Mood Disorder", "Anxiety Disorder", "Attention Deficit Hyperactivity Disorder", "Post-traumatic Stress Disorder", "Obsessive-Compulsive Disorder", "Substance Use Disorder", "Personality Disorder", "Stress Response Syndromes", "Addictive Disorder", "Eating Disorder", "Dissociative Disorder", "Psychotic Disorder"];//"Other"
 
     var colors = ["#eb3a4b", "#eb4f27", "#f19637", "#fcea4f", "#9bfb4e", "#69e282", "#6ee5b9","#68e2fc", "#407bf7", "#425ef5", "#5d30f5", "#c333f1"]; //
 
@@ -256,18 +333,18 @@ img{
 
     starSVG.selectAll("circle")
       .data(colors).enter().append("circle")
-      .attr("cx", function(d, i) { return 20*Math.cos(i*2*Math.PI/12 + 1.5*Math.PI) + 46; })
-      .attr("cy", function(d, i) { return 20*Math.sin(i*2*Math.PI/12 + 1.5*Math.PI) + 45; })
+      .attr("cx", function(d, i) { return 24*Math.cos(i*2*Math.PI/12 + 1.5*Math.PI) + 46; })
+      .attr("cy", function(d, i) { return 24*Math.sin(i*2*Math.PI/12 + 1.5*Math.PI) + 45; })
       .attr("r", 10).style("fill", function(d) { return d; })
       .style("cursor", "pointer").style("opacity", 0.8)
       .on("mouseover", function(d, i) {
           d3.select(this)
-          .attr("r", 10)
+          .attr("r", 12)
           .attr("cx", function() {
-              return 22*Math.cos(i*2*Math.PI/12 - 0.5*Math.PI) + 46;
+              return 27*Math.cos(i*2*Math.PI/12 - 0.5*Math.PI) + 46;
           })
           .attr("cy", function() {
-              return 22*Math.sin(i*2*Math.PI/12 - 0.5*Math.PI) + 45;
+              return 27*Math.sin(i*2*Math.PI/12 - 0.5*Math.PI) + 45;
           });
           condition.text(conditions[i]);
       })
@@ -275,11 +352,12 @@ img{
           d3.select(this)
           .attr("r", 10)
           .attr("cx", function() {
-              return 20*Math.cos(i*2*Math.PI/12 + 1.5*Math.PI) + 46;
+              return 24*Math.cos(i*2*Math.PI/12 + 1.5*Math.PI) + 46;
           })
           .attr("cy", function() {
-              return 20*Math.sin(i*2*Math.PI/12 + 1.5*Math.PI) + 45;
+              return 24*Math.sin(i*2*Math.PI/12 + 1.5*Math.PI) + 45;
           });
+          condition.text('');
       });
 
 
@@ -328,7 +406,7 @@ img{
       // SizeSlider.class('size-sliderbar')
       // process data
       for (let i in data) {
-      //if (i < 100) {
+      //if (i < 500) {
           posData.push({
               // 画面中心坐标 +- 比例尺
               'id': i,
@@ -343,6 +421,7 @@ img{
               'condition': split(data[i]['If so, what condition(s) were you diagnosed with?'], '|'),
               'view': data[i]['Do you think that team members/co-workers would view you more negatively if they knew you suffered from a mental health issue?']
           })
+      //}
       } 
       posDataTotal = posData;
       initPosData = copyArr(posData)
@@ -351,7 +430,7 @@ img{
     }
 
     /* 角度自适应封装方法 */
-    function angleSelfAdaption(arr, r) {
+    function angleSelfAdaption(arr, r, delta) {
       let angleArr = []
       if(arr.length > 0) {
         for(let i = 0; i < arr.length; i++) {
@@ -362,8 +441,8 @@ img{
           // }
           // // 多于一种病 有偏移
           // else {
-              d.x = r * sin(i * TWO_PI / arr.length);
-              d.y = r * cos(i * TWO_PI / arr.length);
+              d.x = r * (sin(-i * TWO_PI / arr.length + delta));
+              d.y = r * (cos(-i * TWO_PI / arr.length+ delta));
           // }
           angleArr.push(d)
         } 
@@ -378,8 +457,12 @@ img{
       var t = millis() / 1000;
       // size = SizeSlider.value();
       push();
-      rect(recPosX, recPosY, recWidth, recHeight);
-      fill('rgba(255,255,255, 0.2)')
+      fill('rgba(255,255,255,0.2)');
+      //noFill();
+      stroke('rgba(255,255,255,0.6)');
+      strokeWeight(1.5);
+      rect(recPosX, recPosY, recWidth, recHeight, 5);
+      pop();
       tempWindowWidth = windowWidth;
       tempWindowHeight = windowHeight;
 
@@ -564,6 +647,9 @@ img{
         buttonState = 'lasso'
         document.getElementsByClassName('lasso-icon')[0].style.opacity = .6
         document.getElementsByClassName('drag-icon')[0].style.opacity = 1
+        document.getElementsByClassName('right-side')[0].style.right = "-292px"
+        document.getElementById("showBtn").setAttribute("value", "true")
+        console.log(document.getElementById("showBtn").getAttribute("value"))
       } else if(btn.id == 'drag') {
         buttonState = 'drag'
         document.getElementsByClassName('drag-icon')[0].style.opacity = .6
@@ -612,6 +698,9 @@ img{
 
     /* 使用套索工具 */
     function useLasso() {
+      showDetailClickCount = 1;
+      document.getElementsByClassName('detail-icon')[0].style.opacity = .6
+      document.getElementsByClassName("right-side")[0].style.right = "-272px";
       recWidth = 0;
       recHeight = 0;
       endPosX = mouseX;
@@ -636,15 +725,19 @@ img{
           if(idList.indexOf(posData[i].id) === -1) {
             idList.push(posData[i].id)
           }
-        } else {
-          // console.log('lasso false!!!')
         }
       }
       for(let i=0; i< idList.length; i++) {
            newDataSet.push(dataSet[idList[i]])
       }
       drawPlanet(newDataSet)
-      document.getElementById('svgContainer').style.display = 'block'
+      if(idList.length > 0) {
+        document.getElementById('empty-container').style.display = 'none'
+        document.getElementById('svgContainer').style.display = 'block'
+      } else {
+        document.getElementById('empty-container').style.display = 'flex'
+        document.getElementById('svgContainer').style.display = 'none'
+      }
       document.getElementById('svgContainer').setAttribute('class', 'slidedown')
     }
 
@@ -666,7 +759,7 @@ img{
 
     /* 弹出框 */
     function showPopup(infoElem) {
-          let popupBox = document.getElementById('popupBox')
+          let popupBox = document.getElementById('popupText')
           let age = infoElem['What is your age?']
           let gender = infoElem['What is your gender?']
           let comment = infoElem['Why or why not?(mental)']
@@ -678,7 +771,7 @@ img{
           + '(4) Positions: ' + positions + '<br/>' 
           + '(5) Bring Mental Health in Interview?: ' + comment
           // console.log(infoElem)
-          popupBox.style.display = 'block'
+          document.getElementById('popupBox').style.display = 'block'
       }
 
     d3.csv('2016-csv-pre.csv').then(function(rawData) {
@@ -700,17 +793,17 @@ img{
           }
         })
         var rowDataSet = sliceArray(dataSet, sampleNum);
-        var width = 500
+        var width = 350
         var height = 70*(rowLen+15)
         var svg = d3.select('#svgContainer').append('svg').attr('id','svgWrapper').attr('width', width).attr('height', height)
         /* 通过循环row数组达到每行绘制的效果 */
         rowDataSet.forEach((item, i) => {
         let row = svg.append('g').attr('rowKey', i).attr('transform', function() {
-          return 'translate(50, '+ (i+1)*100 +')'
+          return 'translate(50, '+ (i*110+90) +')'
         })
         let g = row.selectAll('.element').data(item).enter().append('g').attr('class','element')
         .attr('transform', function(d, i) {
-          return 'translate(' + i*95 +','+ 0 +'), rotate(0)'
+          return 'translate(' + (i*90-10) +','+ 0 +'), rotate(0)'
           // return 'translate(' + posData[i]['x'] +','+ posData[i]['y'] +'), rotate(0)'
         })
         .on("mouseover", function(d, i) {
@@ -751,7 +844,7 @@ img{
            //循环元素，每一次获取到元素的conditions,
            //每绘制一个光晕，判断它在当前花瓣应该在的位置
           let conditions = filterSplit(d['If so, what condition(s) were you diagnosed with?'], '|')
-          let angleForXY = angleSelfAdaption(conditions, pos_radius)
+          let angleForXY = angleSelfAdaption(conditions, pos_radius, 0)
           let halos = []
           for(let i = 0; i < conditions.length; i++) {
             let currentColorForConditionsIndex = conditionsList.indexOf(conditions[i])
@@ -951,38 +1044,65 @@ img{
 
         /****  映射职业啦:卫星  ****/
         let satellite_self_radius = 1
-        let satellite_radius = 25
+        let satellite_radius = 27
         let single_satellite_angle = Math.PI/12
         let pos_list = ['Back-end Developer', 'Front-end Developer', 'Supervisor/Team Lead', 
         'DevOps/SysAdmin', 'Support', 'One-person shop', 
         'Designer', 'Dev Evangelist/Advocate', 'Executive Leadership',
         'Sales', 'HR', 'Other']
 
-        for(let i = 0; i < 13; i ++) {
-          g.append('circle')
-          .attr('r', satellite_self_radius)
-          .attr('cy', function(d) {
-            let angle = single_satellite_angle*i - Math.PI/2
-            let light_y = Math.sin(angle)*satellite_radius
-            return light_y
-          })
-          .attr('cx', function(d) {
-            let angle = single_satellite_angle*i - Math.PI/2
-            let light_x = Math.cos(angle)*satellite_radius
-            return light_x
-          })
-          .attr('fill',function(d) {
-            let pos_str = d['Which of the following best describes your work position?']
-            let state = pos_str.indexOf(pos_list[i])
-            if(state !== -1) {
-              return '#fff'
-            } else {
-              return 'transparent'
+        g.selectAll('.satellite').data(function(d) {
+           //循环元素，每一次获取到元素的positions,
+           //每绘制一个光晕，判断它在当前花瓣应该在的位置
+          let positions = filterSplit(d['Which of the following best describes your work position?'], '|')
+          let angleForXY = angleSelfAdaption(pos_list, satellite_radius, -Math.PI)
+          let satellites = []
+          for(let i = 0; i < positions.length; i++) {
+            let currentColorForPositionsIndex = pos_list.indexOf(positions[i])
+            currentColorForPositionsIndex= currentColorForPositionsIndex !== -1 ? currentColorForPositionsIndex : 11
+            // let conColor = condition_colors[currentColorForConditionsIndex]
+            let satellitesObj = {
+              'cx': angleForXY[currentColorForPositionsIndex].x,
+              'cy': angleForXY[currentColorForPositionsIndex].y,
             }
-          })
-          // .attr('fill-opacity', 1)
-          // .attr('fill','transparent')
-        }
+            satellites.push(satellitesObj)
+          }
+          //  console.log(d)
+           //根据conditions返回绘制光晕数据的数组，动态的长度
+           return satellites
+         }).enter().append('circle')
+         .attr('class','satellite')
+         .attr('r', satellite_self_radius)
+         .attr('cy', d=>d.cy)
+         .attr('cx', d=>d.cx)
+         .attr('fill', '#fff')
+        //  .style("filter", "url(#motionFilter)")
+
+        // for(let i = 0; i < 13; i ++) {
+        //   g.append('circle')
+        //   .attr('r', satellite_self_radius)
+        //   .attr('cy', function(d) {
+        //     let angle = single_satellite_angle*i - Math.PI/2
+        //     let light_y = Math.sin(angle)*satellite_radius
+        //     return light_y
+        //   })
+        //   .attr('cx', function(d) {
+        //     let angle = single_satellite_angle*i - Math.PI/2
+        //     let light_x = Math.cos(angle)*satellite_radius
+        //     return light_x
+        //   })
+        //   .attr('fill',function(d) {
+        //     let pos_str = d['Which of the following best describes your work position?']
+        //     let state = pos_str.indexOf(pos_list[i])
+        //     if(state !== -1) {
+        //       return '#fff'
+        //     } else {
+        //       return 'transparent'
+        //     }
+        //   })
+        //   // .attr('fill-opacity', 1)
+        //   // .attr('fill','transparent')
+        // }
 
         //绘制菱形
         g.append('path')

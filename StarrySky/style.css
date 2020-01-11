@@ -1,21 +1,10 @@
 p,h1 {
-  margin: 0
+  margin: 2px;
+  font-size: 14px;
 }
 #defaultCanvas0 {
  position: absolute;
  /* top: 800px; */
-}
-
-#popupBox {
- background-color: #ffffff;
- box-shadow: 0 0 2px 2px #999;
- padding: 5px;
- position: absolute;
- /* position: fixed; */
- right: 200px;
- width: 300px;
- z-index: 6;
- /* height: 200px; */
 }
 #selectBenefits {
  position: fixed;
@@ -66,12 +55,11 @@ p,h1 {
 }
 
 #svgContainer {
- width: 400px;
- height: 85%;
+  display: none;
+ width: 380px;
+ height: 90%;
  overflow-y: scroll;
  overflow-x: hidden;
- padding: 0 10px;
- /* display: none; */
 }
 
 #svgWrapper {
@@ -79,10 +67,7 @@ p,h1 {
 }
 
 .desc-box__title {
- color: #fff;
- /* line-height: 40px; */
- padding: 20px;
- text-align: left;
+ padding: 10px 0 10px 20px;
  height: 5%;
 }
 
@@ -128,28 +113,50 @@ p,h1 {
  animation-timing-function: linear;
 }
 
-.drag-icon {
- background-image: url('4x/drag-icon.png');
+.close-icon {
+  background-image: url('img/close.svg');
+  background-position:center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.detail-icon {
+ background-image: url('img/detail-icon.png');
  background-position:center;
  background-size: 100% 100%;
  background-repeat: no-repeat;
- width: 50px;
- height: 50px;
+ width: 40px;
+ height: 40px;
+}
+
+.drag-icon {
+ background-image: url('img/drag-icon.png');
+ background-position:center;
+ background-size: 100% 100%;
+ background-repeat: no-repeat;
+ width: 40px;
+ height: 40px;
 }
 
 .lasso-icon {
- background-image: url('4x/lasso-icon.png');
+ background-image: url('img/lasso-icon.png');
  background-position:center;
  background-size: 100% 100%;
  background-repeat: no-repeat;
- width: 50px;
- height: 50px;
+ width: 40px;
+ height: 40px;
 }
 
 .interact-button {
  display: flex;
  flex-wrap: wrap;
- height: 70px;
+ height: 60px;
  width: 50px;
  color: #fff;
  justify-content: center;
